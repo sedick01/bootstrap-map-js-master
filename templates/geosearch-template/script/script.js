@@ -31,7 +31,7 @@ function (Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMar
 
     // Create widget
     var geocoder = new Geocoder({
-    value: 'starbucks',
+    //value: 'starbucks',
     maxLocations: 10,
     autoComplete: true,
     arcgisGeocoder: true,
@@ -120,8 +120,35 @@ function (Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMar
 
     var sym = createPictureSymbol("../images/blue-pin.png", 0, 12, 13, 24);
 
+    $(document).ready(function () {
+        $("#basemapList li").click(function (e) {
+            switch (e.target.text) {
+                case "Streets":
+                    map.setBasemap("streets");
+                    break;
+                case "Imagery":
+                    map.setBasemap("hybrid");
+                    break;
+                case "National Geographic":
+                    map.setBasemap("national-geographic");
+                    break;
+                case "Topographic":
+                    map.setBasemap("topo");
+                    break;
+                case "Gray":
+                    map.setBasemap("gray");
+                    break;
+                case "Open Street Map":
+                    map.setBasemap("osm");
+                    break;
+            }
+        });
+    });
+
+
     // Show modal dialog, hide nav
     $(document).ready(function(){
+
     // Close menu
     $('.nav a').on('click', function(){
     $(".navbar-toggle").click();
@@ -132,6 +159,8 @@ function (Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMar
     // Bootstrap work-around
     $("body").css("margin-right","0px");
     $(".navbar").css("margin-right","0px");
+
+
     });
     });
     });
