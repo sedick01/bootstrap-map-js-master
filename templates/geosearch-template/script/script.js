@@ -21,7 +21,7 @@ function (Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMar
     var map = BootstrapMap.create("mapDiv", {
     basemap: "streets",
     center:[-85.724, 37.593],
-    zoom: 12,
+    zoom: 8,
     scrollWheelZoom: false
     });
     var scalebar = new Scalebar({
