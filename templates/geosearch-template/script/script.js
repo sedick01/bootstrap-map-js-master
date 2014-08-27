@@ -21,7 +21,7 @@ function (Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMar
     var map = BootstrapMap.create("mapDiv", {
     basemap: "streets",
     center:[-85.724, 37.593],
-    zoom: 8,
+    zoom: 7,
     scrollWheelZoom: false
     });
     var scalebar = new Scalebar({
@@ -141,6 +141,19 @@ function (Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMar
                 case "Open Street Map":
                     map.setBasemap("osm");
                     break;
+/*
+                case "Pinterest":
+                    options = {
+                        id:'mapbox-pinterest',
+                        copyright: 'Pinterest/MapBox',
+                        resampling: true,
+                        subDomains: ['a','b','c','d']
+                    };
+                    l = new WebTiledLayer('http://${subDomain}.tiles.mapbox.com/v3/pinterest.map-ho21rkos/${level}/${col}/${row}.jpg',options);
+                    map.addLayer(l);
+                    break;
+*/
+
             }
         });
     });
