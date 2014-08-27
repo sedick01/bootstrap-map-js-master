@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../images/favicon.png">
+    <meta name="description" content="Bootstrap template map for the Cabinet">
+    <meta name="author" content="ak">
+    <!--<link rel="shortcut icon" href="../images/favicon.png">-->
 
     <title>KYTC Template Map(Bootstrap)</title>
 
@@ -28,7 +28,8 @@
         .simpleGeocoder {
             margin-right: 5px;
         }
-        /* Option 2: Geosearch in nav;
+         /*Option 2: Geosearch in nav;*/
+/*
       .simpleGeocoder .esriGeocoderContainer {
         width: 180px;
       }
@@ -42,8 +43,8 @@
         .simpleGeocoder {
           margin-right: 7px;
         }
+*/
       }
-      */
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -51,6 +52,8 @@
     <script src="../bootstrap_v3/docs-assets/js/html5shiv.js"></script>
     <script src="../bootstrap_v3/docs-assets/js/respond.min.js"></script>
     <![endif]-->
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -141,6 +144,9 @@
 <!-- Bootstrap-map-js -->
 <div id="mapDiv"></div>
 
+
+
+<!--Locally stored scripts-->
 <script type="text/javascript">
     var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
     var dojoConfig = {
@@ -152,16 +158,17 @@
         }]
     };
 </script>
-<script src="http://js.arcgis.com/3.10compact"></script>
 
-// My script
+<script src="http://js.arcgis.com/3.10compact"></script>
 <script src="script/script.js"></script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
+<!--
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+-->
 </body>
 
 </html>
