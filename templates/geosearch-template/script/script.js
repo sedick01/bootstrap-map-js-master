@@ -19,7 +19,7 @@ require([
         "esri/layers/ArcGISDynamicMapServiceLayer"
     ],
     function(Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMarkerSymbol, Popup, dom, on, BootstrapMap, FeatureLayer) {
-        //"use strict";
+        "use strict";
 
         // Get a reference to the ArcGIS Map class
         map = BootstrapMap.create("mapDiv", { //reference to the <div> tag where the map will be placed on the page, and options
@@ -192,7 +192,7 @@ require([
         });
 
         // County layer and info template
-        var infoTemplate = new InfoTemplate("Attributes", "<tr>County:<td>${NAME2}</td></tr>");
+        var infoTemplate = new InfoTemplate("County", "${NAME2}");
         var counties = new esri.layers.FeatureLayer("http://test1.maps.kytc.ky.gov/arcgis/rest/services/BaseMap/Overview/MapServer/5", {
             mode: FeatureLayer.MODE_SNAPSHOT,
             outFields: ["NAME2"],
@@ -200,7 +200,7 @@ require([
         });
         var symbol = new esri.symbol.SimpleFillSymbol(
             esri.symbol.SimpleFillSymbol.STYLE_SOLID,
-            new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 255, 255, 0.35]), 2), new dojo.Color([125, 125, 125, 0.35]));
+            new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 255, 255, 0.35]), 2.5), new dojo.Color([125, 125, 125, 0.35]));
         counties.setRenderer(new esri.renderer.SimpleRenderer(symbol));
 
         // SYP layers
@@ -227,7 +227,7 @@ require([
         map.addLayer(SYPRow);
         map.addLayer(SYPUtilities);
         map.addLayer(counties);
-        map.infoWindow.resize(155, 75)
+        map.infoWindow.resize(120, 75)
 
         //map.addLayers([counties,SYPConstruction,SYPPlanning,SYPDesign,SYPRow,SYPUtilities]);
     });
