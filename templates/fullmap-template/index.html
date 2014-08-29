@@ -109,17 +109,6 @@
 //                      + "<b>2007 Population: </b>${POP2007:NumberFormat}<br/>"
 //                      + "<b>2007 Population per Sq. Mi.: </b>${POP07_SQMI:NumberFormat}");
 
-              var counties = new esri.layers.FeatureLayer("http://test1.maps.kytc.ky.gov/arcgis/rest/services/BaseMap/Overview/MapServer/5");
-
-              var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,255,0.35]), 1),new dojo.Color([125,125,125,0.35]));
-              counties.setRenderer(new esri.renderer.SimpleRenderer(symbol));
-//              counties.setDefinitionExpression("STATE_NAME = 'Pennsylvania'");
-
-//              var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,255,255,0.35]), 1),new dojo.Color([125,125,125,0.35]));
-//              counties.setRenderer(new esri.renderer.SimpleRenderer(symbol));
-
-              map.addLayer(counties);
-
 
            $(document).ready(function () {
               $("#basemapList li").click(function (e) {

@@ -1,8 +1,9 @@
 /**
  * Created by ahjung.kim on 8/26/2014.
  */
-
-require(["esri/map",
+var map;
+require([
+        "esri/map",
         "esri/dijit/Scalebar",
         "esri/dijit/Geocoder",
         "esri/InfoTemplate",
@@ -13,22 +14,24 @@ require(["esri/map",
         "dojo/dom",
         "dojo/on",
         "application/bootstrapmap",
-        "dojo/domReady!"
+        "dojo/domReady!",
+        "esri/layers/FeatureLayer",
+        "esri/layers/ArcGISDynamicMapServiceLayer"
     ],
-    function(Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMarkerSymbol, Popup, dom, on, BootstrapMap) {
-        "use strict";
+    function(Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMarkerSymbol, Popup, dom, on, BootstrapMap, FeatureLayer) {
+        //"use strict";
 
         // Get a reference to the ArcGIS Map class
-        var map = BootstrapMap.create("mapDiv", { //reference to the <div> tag where the map will be placed on the page, and options
-            basemap: "osm", //JSON object (key: value)
+        map = BootstrapMap.create("mapDiv", { //reference to the <div> tag where the map will be placed on the page, and options
+            basemap: "streets", //JSON object (key: value)
             center: [-85.724, 37.593],
             zoom: 7,
             scrollWheelZoom: false,
-            logo: false
-            //sliderStyle: "small",
-            //sliderPosition: "top-right"
-            //nav: true
+            logo: false,
+            nav: true
         });
+
+
         var scalebar = new Scalebar({
             map: map,
             scalebarUnit: "dual"
@@ -170,7 +173,6 @@ require(["esri/map",
             });
         });
 
-
         // Show modal dialog, hide nav
         $(document).ready(function() {
 
@@ -188,6 +190,44 @@ require(["esri/map",
 
             });
         });
+
+        // County layer and info template
+        var infoTemplate = new InfoTemplate("Attributes", "<tr>County:<td>${NAME2}</td></tr>");
+        var counties = new esri.layers.FeatureLayer("http://test1.maps.kytc.ky.gov/arcgis/rest/services/BaseMap/Overview/MapServer/5", {
+            mode: FeatureLayer.MODE_SNAPSHOT,
+            outFields: ["NAME2"],
+            infoTemplate: infoTemplate
+        });
+        var symbol = new esri.symbol.SimpleFillSymbol(
+            esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+            new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 255, 255, 0.35]), 2), new dojo.Color([125, 125, 125, 0.35]));
+        counties.setRenderer(new esri.renderer.SimpleRenderer(symbol));
+
+        // SYP layers
+        //TODO: This layer has query set? Symbols don't show.
+        /*var SYPConstruction = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/0",{
+            mode: FeatureLayer.MODE_ONDEMAND
+        });*/
+        var SYPPlanning = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/1", {
+            mode: FeatureLayer.MODE_ONDEMAND
+        });
+        var SYPDesign = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/2", {
+            mode: FeatureLayer.MODE_ONDEMAND
+        });
+        var SYPRow = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/3", {
+            mode: FeatureLayer.MODE_ONDEMAND
+        });
+        var SYPUtilities = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/4", {
+            mode: FeatureLayer.MODE_ONDEMAND
+        });
+
+        //map.addLayer(SYPConstruction);
+        map.addLayer(SYPPlanning);
+        map.addLayer(SYPDesign);
+        map.addLayer(SYPRow);
+        map.addLayer(SYPUtilities);
+        map.addLayer(counties);
+        map.infoWindow.resize(155, 75)
+
+        //map.addLayers([counties,SYPConstruction,SYPPlanning,SYPDesign,SYPRow,SYPUtilities]);
     });
-
-
