@@ -4,7 +4,7 @@ A light-weight extension for building responsive web mapping apps with the [ArcG
 
 [See documentation and examples](http://esri.github.com/bootstrap-map-js/demo/index.html)
 
-View live map (http://test1.maps.kytc.ky.gov/bootstrap-map-js-master/templates/geosearch-template/index.html)
+[View live map] (http://test1.maps.kytc.ky.gov/bootstrap-map-js-master/templates/geosearch-template/index.html)
 
 ## Features
 
