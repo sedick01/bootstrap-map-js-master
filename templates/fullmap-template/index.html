@@ -24,6 +24,14 @@
         min-height: 100%; 
         max-height: 100%; 
       }
+
+      #search {
+          display: block;
+          position: absolute;
+          z-index: 2;
+          top: 20px;
+          left: 74px;
+      }
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -69,6 +77,7 @@
 
     <!-- Bootstrap-map-js -->
     <div id="mapDiv"></div>
+    <div id="search"></div>
 
     <script type="text/javascript">
       var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
@@ -81,11 +90,14 @@
           }]
       };
     </script>
-    <script src="http://js.arcgis.com/3.9compact"></script>
-    <script src="src/js/script"></script>
+    <script src="http://js.arcgis.com/3.10"></script>
     <script>
-        require(["esri/map", "esri/dijit/Scalebar", "application/bootstrapmap", "dojo/domReady!"],
-          function(Map, Scalebar, BootstrapMap) {
+        require(["esri/map",
+                    "esri/dijit/Scalebar",
+                    "application/bootstrapmap",
+                    "esri/dijit/Geocoder",
+                    "dojo/domReady!"],
+          function(Map, Scalebar, BootstrapMap, Geocoder) {
             // Get a reference to the ArcGIS Map class
             var map = BootstrapMap.create("mapDiv", {
               basemap: "national-geographic",
@@ -94,21 +106,18 @@
               scrollWheelZoom: false
             });
 
+
+            var geocoder = new esri.dijit.Geocoder({
+                  map: map
+              }, "search");
+              geocoder.startup();
+
+
+
             var scalebar = new Scalebar({
               map: map,
               scalebarUnit: "dual"
             });
-
-
-
-//              //NOTE: Requires dojo.number for the formatting
-//              var infoTemplate = new esri.InfoTemplate();
-//              infoTemplate.setTitle("<b>${NAME} County</b>");
-//              infoTemplate.setContent("<b>2000 Population: </b>${POP2000:NumberFormat}<br/>"
-//                      + "<b>2000 Population per Sq. Mi.: </b>${POP00_SQMI:NumberFormat}<br/>"
-//                      + "<b>2007 Population: </b>${POP2007:NumberFormat}<br/>"
-//                      + "<b>2007 Population per Sq. Mi.: </b>${POP07_SQMI:NumberFormat}");
-
 
            $(document).ready(function () {
               $("#basemapList li").click(function (e) {
@@ -134,8 +143,6 @@
                 }
               });
             });
-
-
         });
     </script>
 

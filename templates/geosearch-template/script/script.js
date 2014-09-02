@@ -1,7 +1,7 @@
 /**
  * Created by ahjung.kim on 8/26/2014.
  */
-var map;
+var map, geocoder;
 require([
         "esri/map",
         "esri/dijit/Scalebar",
@@ -16,9 +16,10 @@ require([
         "application/bootstrapmap",
         "dojo/domReady!",
         "esri/layers/FeatureLayer",
-        "esri/layers/ArcGISDynamicMapServiceLayer"
+        "esri/layers/ArcGISDynamicMapServiceLayer",
+        "esri/dijit/HomeButton"
     ],
-    function(Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMarkerSymbol, Popup, dom, on, BootstrapMap, FeatureLayer) {
+    function(Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMarkerSymbol, Popup, dom, on, BootstrapMap, FeatureLayer, HomeButton) {
         "use strict";
 
         // Get a reference to the ArcGIS Map class
@@ -31,11 +32,20 @@ require([
             nav: true
         });
 
+        var geocoder2 = new esri.dijit.Geocoder({
+            map: map
+        }, "search");
+        geocoder2.startup();
 
         var scalebar = new Scalebar({
             map: map,
             scalebarUnit: "dual"
         });
+
+        var home = new esri.dijit.HomeButton({
+            map: map
+        }, "HomeButton");
+        home.startup();
 
         // Create widget
         var geocoder = new Geocoder({
@@ -203,11 +213,15 @@ require([
             new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 255, 255, 0.35]), 2.5), new dojo.Color([125, 125, 125, 0.35]));
         counties.setRenderer(new esri.renderer.SimpleRenderer(symbol));
 
+
         // SYP layers
         //TODO: This layer has query set? Symbols don't show.
-        /*var SYPConstruction = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/0",{
+
+/*
+        var SYPConstruction = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/0/query",{
             mode: FeatureLayer.MODE_ONDEMAND
-        });*/
+        });
+*/
         var SYPPlanning = new esri.layers.FeatureLayer("http://maps.kytc.ky.gov/arcgis/rest/services/Apps/ActiveHighwayPlan/MapServer/1", {
             mode: FeatureLayer.MODE_ONDEMAND
         });
@@ -228,6 +242,7 @@ require([
         map.addLayer(SYPUtilities);
         map.addLayer(counties);
         map.infoWindow.resize(120, 75)
+
 
         //map.addLayers([counties,SYPConstruction,SYPPlanning,SYPDesign,SYPRow,SYPUtilities]);
     });

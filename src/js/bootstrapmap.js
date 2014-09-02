@@ -1,4 +1,17 @@
-define(["esri/map", "esri/dijit/Popup", "esri/arcgis/utils", "dojo/_base/declare", "dojo/on", "dojo/_base/connect", "dojo/touch", "dojo/dom", "dojo/_base/lang", "dojo/dom-style", "dojo/query", "dojo/NodeList-traverse", "esri/geometry/Point", "dojo/domReady!"],
+define(["esri/map",
+        "esri/dijit/Popup",
+        "esri/arcgis/utils",
+        "dojo/_base/declare",
+        "dojo/on",
+        "dojo/_base/connect",
+        "dojo/touch",
+        "dojo/dom",
+        "dojo/_base/lang",
+        "dojo/dom-style",
+        "dojo/query",
+        "dojo/NodeList-traverse",
+        "esri/geometry/Point",
+        "dojo/domReady!"],
   function (Map, Popup, EsriUtils, declare, on, conn, touch, dom, lang, style, query, nodecols, Point) {
     "use strict";
     return {

@@ -15,11 +15,12 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="geosearch-template.css" rel="stylesheet">
+    <link href="css/geosearch-template.css" rel="stylesheet">
 
     <!-- Bootstrap-map-js -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">
     <link rel="stylesheet" type="text/css" href="../../src/css/bootstrapmap.css">
+
     <style type="text/css">
         #mapDiv {
             min-height: 100%;
@@ -45,6 +46,20 @@
         }
         }
 */
+        #HomeButton {
+            position: absolute;
+            top: 150px;
+            left: 16px;
+            z-index: 50;
+        }
+
+        #search {
+            display: block;
+            position: absolute;
+            z-index: 2;
+            top: 20px;
+            left: 75px;
+        }
 
     </style>
 
@@ -141,11 +156,10 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
 <!-- Bootstrap-map-js -->
 <div id="mapDiv"></div>
-
-
+<div id="HomeButton"></div>
+<div id="search"></div>
 
 <!--Locally stored scripts-->
 <script type="text/javascript">
@@ -159,7 +173,6 @@
         }]
     };
 </script>
-
 <script src="http://js.arcgis.com/3.10/"></script>
 <script src="script/script.js"></script>
 
