@@ -6,7 +6,7 @@
   height: 100%;
   min-height: 100px;
   max-height: 100%;
- 	text-align: left;
+  text-align: left;
   overflow: hidden;
 }
 
@@ -17,8 +17,9 @@
 /*** Restyle Esri Zoomin-out ***/
 .esriSimpleSlider {
   border: 1px solid #cccccc;
-  top: 15px;
-  left: 15px;
+  right: 16px !important;
+  top:3% !important;
+
 }
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton,
 .esriSimpleSliderVertical .esriSimpleSliderDecrementButton{
@@ -180,7 +181,7 @@ background: url(../images/popup.png) no-repeat;
 }
 
 .simpleGeocoder .esriGeocoder input {
-  width: 73%;
+  width: 70%;
   padding: 7px 0 6px;
   font-size: 14px;
   line-height: 18px;

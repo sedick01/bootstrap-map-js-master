@@ -46,21 +46,34 @@
         }
         }
 */
-        #HomeButton {
-            position: absolute;
-            top: 150px;
-            left: 16px;
-            z-index: 50;
-        }
-
         #search {
             display: block;
             position: absolute;
+            top: 70px;
+            left: 18px;
             z-index: 2;
-            top: 100px;
-            right: 75px;
+            width: 250px;
         }
 
+        #HomeButton {
+            position: absolute;
+            top: 141px;
+            right: 16px;
+            z-index: 50;
+        }
+        #LocateButton {
+            position: absolute;
+            top: 180px;
+            right: 16px;
+            z-index: 50;
+        }
+        #basemapGallery {
+            position: absolute;
+            top: 200px;
+            right: 16px;
+            z-index: 50;
+
+        }
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -160,6 +173,9 @@
 <div id="mapDiv"></div>
 <div id="HomeButton"></div>
 <div id="search"></div>
+<div id="LocateButton"></div>
+<div id="basemapGallery"></div>
+
 
 <!--Locally stored scripts-->
 <script type="text/javascript">
@@ -175,6 +191,7 @@
 </script>
 <script src="http://js.arcgis.com/3.10/"></script>
 <script src="script/script.js"></script>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
