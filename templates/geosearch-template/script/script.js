@@ -60,7 +60,7 @@ require([
 
         // Add basemap gallery
         //add the basemap gallery, in this case we'll display maps from ArcGIS.com including bing maps
-        var basemapGallery = new BasemapGallery({
+        var basemapGallery = new esri.dijit.BasemapGallery({
             showArcGISBasemaps: true,
             map: map
         }, "basemapGallery");
