@@ -17,23 +17,67 @@ require([
         "dojo/domReady!",
         "esri/layers/FeatureLayer",
         "esri/layers/ArcGISDynamicMapServiceLayer",
-        "esri/dijit/HomeButton"
+        "esri/dijit/HomeButton",
+        "esri/dijit/OverviewMap",
+        "dojo/domReady!",
+        "esri/dijit/LocateButton",
+        "esri/dijit/BasemapGallery"
     ],
-    function(Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMarkerSymbol, Popup, dom, on, BootstrapMap, FeatureLayer, HomeButton) {
+    function(Map, Scalebar, Geocoder, InfoTemplate, Graphic, Multipoint, PictureMarkerSymbol,
+             Popup, dom, on, BootstrapMap, FeatureLayer, HomeButton, OverviewMap, BasemapGallery) {
         "use strict";
+
 
         // Get a reference to the ArcGIS Map class
         map = BootstrapMap.create("mapDiv", { //reference to the <div> tag where the map will be placed on the page, and options
             basemap: "streets", //JSON object (key: value)
             center: [-85.724, 37.593],
             zoom: 7,
-            scrollWheelZoom: false,
+            scrollWheelZoom: true,
             logo: false,
-            nav: true
+            nav: false,
+            sliderPosition: "top-right"
+            //sliderOrientation:"vertical"
         });
 
-        var geocoder2 = new esri.dijit.Geocoder({
+        // Add overview map
+        var overviewMapDijit = new esri.dijit.OverviewMap({
+            map: map,
+            attachTo: "bottom-right",
+            height: 150,
+            width: 200,
+            visible: true,
+            opacity: 0.4,
+            expandFactor: 2.5
+        });
+        overviewMapDijit.startup();
+
+        // Add locate button
+        var geoLocate = new esri.dijit.LocateButton({
             map: map
+        }, "LocateButton");
+        geoLocate.startup();
+
+        // Add basemap gallery
+        //add the basemap gallery, in this case we'll display maps from ArcGIS.com including bing maps
+        var basemapGallery = new BasemapGallery({
+            showArcGISBasemaps: true,
+            map: map
+        }, "basemapGallery");
+        basemapGallery.startup();
+
+        basemapGallery.on("error", function(msg) {
+            console.log("basemap gallery error:  ", msg);
+        });
+
+
+        // Add geocoder
+        var geocoder2 = new esri.dijit.Geocoder({
+            map: map,
+            autoComplete: true,
+            arcgisGeocoder:{
+                name: "Esri World Geocoder"
+            }
         }, "search");
         geocoder2.startup();
 
@@ -205,8 +249,7 @@ require([
         var infoTemplate = new InfoTemplate("County", "${NAME2}");
         var counties = new esri.layers.FeatureLayer("http://test1.maps.kytc.ky.gov/arcgis/rest/services/BaseMap/Overview/MapServer/5", {
             mode: FeatureLayer.MODE_SNAPSHOT,
-            outFields: ["NAME2"],
-            infoTemplate: infoTemplate
+            outFields: ["NAME2"]
         });
         var symbol = new esri.symbol.SimpleFillSymbol(
             esri.symbol.SimpleFillSymbol.STYLE_SOLID,
