@@ -25,6 +25,11 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
+# WebStrom Files 
+workspace.xml
+tasks.xml
+.iws
+
 # Icon must ends with two \r.
 Icon
 
